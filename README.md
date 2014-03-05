@@ -8,7 +8,7 @@
        <h1>message board</h1>
        <div style= 
        <div style="width:200px; height:1000px; background-color:#FF9840">
-           
+            interactive online message board 
           
        </div>>
 	</body>

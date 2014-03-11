@@ -4,7 +4,7 @@ body {
   margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
-  width: 800px;
+  width: 1200px;
   background-color: #f8f8f8;
   font-size: 24px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -45,29 +45,43 @@ em {
   color: black;
 }
 
+/* Chat */
+#leftMessageDiv
+{
+  background-color: white;
+  height: 700px;
+  width: 350px;
+  padding: 10px;
+  border: 8px solid #424547;
+  margin-bottom: 5px;
+  text-align: left;
+  float: left;
+}
+#middleMessageDiv
+{
+ background-color: white;
+    height: 700px;
+    border: 1px solid red;
+    float: middle;
+   padding: 10px;
+      border: 8px solid #424547;
+   margin-bottom: 5px;
+   text-align: left;
 
 
-/* Drawing */
-
-#colorholder {
-  width: 480px;
-  height: 30px;
-  border: 2px solid #424547;
-  margin-top: 5px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
-#drawing-canvas {
-  border: 10px solid #999;
-  width: 480px;
-  height:  420px
-}
 
-.colorbox {
-  width: 22px;
-  height: 22px;
-  margin: 1px;
-  display: inline-block;
-  border: 3px solid black;
+#rightMessageDiv
+{
+     background-color: white;
+    width: 350px;
+    height: 700px;
+    border: 1px solid red;
+    float: right;
+	 padding: 10px;
+      border: 8px solid #424547;
+	 margin-bottom: 5px;
+	 text-align: left;
+
 }

@@ -1,0 +1,125 @@
+<html>
+<head>
+  <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js'></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id='leftMessageDiv' onmousedown="divcount(1)" ondblclick="del(1)"></div>
+<div id='rightMessageDiv'onmousedown="divcount(2)" ondblclick="del(2)"></div>
+<div id='middleMessageDiv'onmousedown="divcount(3)" ondblclick="del(3)"></div>
+<br /><br /><br />
+<input type='text' id='messageInput' placeholder='Message...'>
+<script>
+var divNum = 0;
+function divcount(num)
+{  
+   divNum = num;  
+}
+function del(num)
+{  
+     if (num == 1)
+  {
+    column1.remove();
+  }
+  if (num == 2)
+  {
+    column2.remove();
+  }
+  if (num == 3)
+  {
+    column3.remove();
+  }
+  location.reload();
+}
+
+function getQueryVariable(variable)
+  {
+	var query = window.location.search.substring(1);
+	var vars = query.split('&');
+	for (var i = 0; i < vars.length; i++)
+	{
+    	var pair = vars[i].split('=');
+    	if (decodeURIComponent(pair[0]) == variable)
+    	{
+        	return decodeURIComponent(pair[1]);
+    	}
+	}
+	alert('Query variable %s not found', variable);
+  }
+
+
+  // Get a reference to the root of the chat data.
+  var messagesRef = new Firebase('https://familymessageboard.firebaseio.com/' + getQueryVariable('id'));
+  var column1 = messagesRef.child('column1');
+  var column2 = messagesRef.child('column2');
+  var column3 = messagesRef.child('column3');
+
+  // When the user presses enter on the message input, write the message to firebase.
+  $('#messageInput').keypress(function (e)
+ {
+	if (e.keyCode == 13) 
+  {
+   
+  	var name = getQueryVariable('uname');
+  	var text = $('#messageInput').val();
+    if (divNum == 1)
+    {
+  	   column1.push({name:name, text:text, divnum:divNum});
+  	   $('#leftMessageDiv').val('');
+    } 
+    if(divNum == 2)
+    {
+        column2.push({name:name, text:text, divnum:divNum});
+        $('#leftMessageDiv').val('');
+    }
+    if(divNum ==3)
+    {
+        column3.push({name:name, text:text, divnum:divNum});
+        $('#leftMessageDiv').val('');
+
+    }
+
+	}
+});
+
+  // Add a callback that is triggered for each chat message.
+  column1.limit(10).on('child_added', function (snapshot)
+{
+   	 var message = snapshot.val();
+    
+  	 if(message.divnum == 1)
+    {    
+  		  $('<div/>').text(message.text).prepend($('<em/>')
+ 			 .text(message.name+': ')).appendTo($('#leftMessageDiv'));
+  		  $('#messagesDiv')[0].scrollTop = $('#leftMessageDiv')[0].scrollHeight;
+    }
+   
+});
+column2.limit(10).on('child_added', function (snapshot)
+{
+var message = snapshot.val();
+    
+    if(message.divnum == 2)
+    {
+     $('<div/>').text(message.text).prepend($('<em/>')
+       .text(message.name+': ')).appendTo($('#rightMessageDiv'));
+        $('#messagesDiv')[0].scrollTop = $('#rightMessageDiv')[0].scrollHeight;
+    }
+});
+column3.limit(10).on('child_added', function (snapshot)
+{
+  var message = snapshot.val();
+  if(message.divnum ==3)
+    {
+        
+        $('<div/>').text(message.text).prepend($('<em/>')
+       .text(message.name+': ')).appendTo($('#middleMessageDiv'));
+        $('#messagesDiv')[0].scrollTop = $('#middleMessageDiv')[0].scrollHeight;
+    }
+
+});
+
+</script>
+</body>
+</html>

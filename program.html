@@ -86,36 +86,122 @@ function getQueryVariable(variable)
   // Add a callback that is triggered for each chat message.
   column1.limit(10).on('child_added', function (snapshot)
 {
-   	 var message = snapshot.val();
-    
+   	var message = snapshot.val();
+    var jump = message.text;
+    var maxLength = 25;
+   // alert(jump.length);
+    if (jump.length < maxLength)
+    {
   	 if(message.divnum == 1)
-    {    
+     {    
   		  $('<div/>').text(message.text).prepend($('<em/>')
  			 .text(message.name+': ')).appendTo($('#leftMessageDiv'));
   		  $('#messagesDiv')[0].scrollTop = $('#leftMessageDiv')[0].scrollHeight;
-    }
-   
+     }
+   }
+   else
+   {
+    var trimmedString = jump.substr(0, maxLength);
+   trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")));
+  
+    var trimmedString2 = jump.substr(trimmedString.length, (maxLength));
+    trimmedString2 = trimmedString2.substr(0, Math.min(trimmedString2.length, trimmedString2.lastIndexOf(" ")));
+  
+    var trimmedString3 = jump.substr((trimmedString.length + trimmedString2.length), (maxLength));
+    trimmedString3 = trimmedString3.substr(0, Math.min(trimmedString3.length, trimmedString3.lastIndexOf(" ")))
+    stringEliments =  new Array();
+    stringEliments[0] = trimmedString;
+    stringEliments[1] = trimmedString2;
+    stringEliments[2] = trimmedString3;
+      for (var i=0;i<3;i++)
+      { 
+        var name = new Array();
+        name[i] = "";
+        name[0] = message.name + ":";
+       $('<div/>').text(stringEliments[i]).prepend($('<em/>')
+       .text(name[i])).appendTo($('#leftMessageDiv'));
+      }
+   }
 });
+
+
 column2.limit(10).on('child_added', function (snapshot)
 {
-var message = snapshot.val();
-    
-    if(message.divnum == 2)
+    var message = snapshot.val();
+    var jump = message.text;
+    var maxLength = 25;
+    if (jump.length < 25)
     {
-     $('<div/>').text(message.text).prepend($('<em/>')
-       .text(message.name+': ')).appendTo($('#rightMessageDiv'));
+     if(message.divnum == 2)
+      {
+         $('<div/>').text(message.text).prepend($('<em/>')
+        .text(message.name+': ')).appendTo($('#rightMessageDiv'));
         $('#messagesDiv')[0].scrollTop = $('#rightMessageDiv')[0].scrollHeight;
+     }
+   }
+   else
+   {
+      var trimmedString = jump.substr(0, maxLength);
+      trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")));
+  
+      var trimmedString2 = jump.substr(trimmedString.length, (maxLength));
+      trimmedString2 = trimmedString2.substr(0, Math.min(trimmedString2.length, trimmedString2.lastIndexOf(" ")));
+  
+      var trimmedString3 = jump.substr((trimmedString.length + trimmedString2.length), (maxLength));
+      trimmedString3 = trimmedString3.substr(0, Math.min(trimmedString3.length, trimmedString3.lastIndexOf(" ")))
+      stringEliments =  new Array();
+      stringEliments[0] = trimmedString;
+      stringEliments[1] = trimmedString2;
+      stringEliments[2] = trimmedString3;
+      for (var i=0;i<3;i++)
+      {
+        var name = new Array();
+        name[i] = "";
+        name[0] = message.name + ":";
+        $('<div/>').text(stringEliments[i]).prepend($('<em/>')
+       .text(name[i])).appendTo($('#rightMessageDiv')); 
+      }
     }
 });
+
+
 column3.limit(10).on('child_added', function (snapshot)
 {
-  var message = snapshot.val();
-  if(message.divnum ==3)
+    var message = snapshot.val();
+    var jump = message.text;
+    var maxLength = 25
+    if (jump.length < 25)
     {
+      if(message.divnum ==3)
+      {
         
         $('<div/>').text(message.text).prepend($('<em/>')
        .text(message.name+': ')).appendTo($('#middleMessageDiv'));
         $('#messagesDiv')[0].scrollTop = $('#middleMessageDiv')[0].scrollHeight;
+     }
+   }
+    else
+   {
+      var trimmedString = jump.substr(0, maxLength);
+      trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")));
+  
+      var trimmedString2 = jump.substr(trimmedString.length, (maxLength));
+      trimmedString2 = trimmedString2.substr(0, Math.min(trimmedString2.length, trimmedString2.lastIndexOf(" ")));
+  
+      var trimmedString3 = jump.substr((trimmedString.length + trimmedString2.length), (maxLength));
+      trimmedString3 = trimmedString3.substr(0, Math.min(trimmedString3.length, trimmedString3.lastIndexOf(" ")))
+      stringEliments =  new Array();
+      stringEliments[0] = trimmedString;
+      stringEliments[1] = trimmedString2;
+      stringEliments[2] = trimmedString3;
+      for (var i=0;i<3;i++)
+      { 
+        var name = new Array();
+        name[i] = "";
+       name[0] = message.name + ":";
+        $('<div/>').text(stringEliments[i]).prepend($('<em/>')
+       .text(name[i])).appendTo($('#middleMessageDiv')); 
+      }
     }
 
 });

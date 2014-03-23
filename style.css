@@ -52,7 +52,7 @@ em {
   height: 700px;
   width: 350px;
   padding: 10px;
-  border: 8px solid #424547;
+  border: 8px solid #008110;
   margin-bottom: 5px;
   text-align: left;
   float: left;
@@ -64,9 +64,10 @@ em {
     border: 1px solid red;
     float: middle;
    padding: 10px;
-      border: 8px solid #424547;
+      border: 8px solid #008110;
    margin-bottom: 5px;
    text-align: left;
+  
 
 
 }
@@ -75,13 +76,13 @@ em {
 #rightMessageDiv
 {
      background-color: white;
-    width: 350px;
-    height: 700px;
-    border: 1px solid red;
-    float: right;
-	 padding: 10px;
-      border: 8px solid #424547;
-	 margin-bottom: 5px;
-	 text-align: left;
+     width: 350px;
+     height: 700px;
+     float: right;
+	   padding: 10px;
+     border: 8px solid;
+	   margin-bottom: 5px;
+	   text-align: left;
+     border-color: #008110
 
 }
